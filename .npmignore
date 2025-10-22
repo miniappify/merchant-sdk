@@ -1,0 +1,38 @@
+# Source files
+src/
+examples/
+
+# Development files
+*.ts
+!*.d.ts
+tsconfig.json
+.eslintrc.js
+
+# Build files
+*.tsbuildinfo
+
+# Development dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Test files
+**/*.test.ts
+**/*.spec.ts
+coverage/
+
+# Git
+.git/
+.gitignore

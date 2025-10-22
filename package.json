@@ -1,0 +1,51 @@
+{
+    "name": "@miniappify/merchant-sdk",
+    "version": "1.0.0",
+    "description": "TypeScript SDK cho Miniappify Merchant API",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch",
+        "prepublishOnly": "npm run build",
+        "test": "jest",
+        "lint": "eslint src/**/*.ts",
+        "lint:fix": "eslint src/**/*.ts --fix"
+    },
+    "keywords": [
+        "miniappify",
+        "merchant",
+        "api",
+        "sdk",
+        "typescript",
+        "ecommerce"
+    ],
+    "author": "Miniappify Team",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/miniappify/merchant-sdk.git"
+    },
+    "bugs": {
+        "url": "https://github.com/miniappify/merchant-sdk/issues"
+    },
+    "homepage": "https://github.com/miniappify/merchant-sdk#readme",
+    "files": [
+        "dist/**/*",
+        "README.md"
+    ],
+    "devDependencies": {
+        "@types/node": "^20.0.0",
+        "@typescript-eslint/eslint-plugin": "^6.0.0",
+        "@typescript-eslint/parser": "^6.0.0",
+        "eslint": "^8.0.0",
+        "jest": "^29.0.0",
+        "typescript": "^5.0.0"
+    },
+    "dependencies": {
+        "axios": "^1.6.0"
+    },
+    "engines": {
+        "node": ">=16.0.0"
+    }
+}
