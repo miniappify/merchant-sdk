@@ -22,6 +22,9 @@ export class HttpClient {
       headers: {
         "Content-Type": "application/json",
         "api-key": this.config.apiKey,
+        "X-API-Key": this.config.apiKey,
+        "x-shop-api-key": this.config.apiKey,
+        "API-KEY": this.config.apiKey,
       },
     });
 
@@ -187,6 +190,9 @@ export class HttpClient {
   updateApiKey(apiKey: string): void {
     this.config.apiKey = apiKey;
     this.client.defaults.headers["X-API-Key"] = apiKey;
+    this.client.defaults.headers["api-key"] = apiKey;
+    this.client.defaults.headers["x-shop-api-key"] = apiKey;
+    this.client.defaults.headers["x-shop-api-key"] = apiKey;
   }
 
   /**

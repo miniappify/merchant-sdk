@@ -7,7 +7,7 @@ import { MiniappifySDK } from "../src";
 // Khởi tạo SDK
 const sdk = new MiniappifySDK({
   apiKey: "your-api-key-here",
-  baseUrl: "https://merchant-api.miniappify.vn",
+  baseUrl: "https://openapi.miniappify.vn",
 });
 
 async function example() {

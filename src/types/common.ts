@@ -4,7 +4,7 @@
 export interface MiniappifyConfig {
   /** API Key để xác thực */
   apiKey: string;
-  /** Base URL của API (mặc định: https://merchant-api.miniappify.vn) */
+  /** Base URL của API (mặc định: https://open-api.miniappify.vn) */
   baseUrl?: string;
   /** Timeout cho requests (mặc định: 30000ms) */
   timeout?: number;

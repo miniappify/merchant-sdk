@@ -7,7 +7,7 @@ import { MiniappifySDK, MiniappifyError } from "../src";
 // Khởi tạo SDK với cấu hình nâng cao
 const sdk = new MiniappifySDK({
   apiKey: "your-api-key-here",
-  baseUrl: "https://merchant-api.miniappify.vn",
+  baseUrl: "https://openapi.miniappify.vn",
   timeout: 60000, // 60 giây
 });
 
