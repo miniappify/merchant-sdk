@@ -17,18 +17,31 @@ export class OrdersAPI {
    * Lấy danh sách đơn hàng
    */
   async list(params?: SearchParams): Promise<OrderListResponse> {
-    const response = await this.httpClient.get<OrderResponse[]>(
-      "/orders",
-      params
-    );
+    const response = await this.httpClient.get<{
+      data: OrderResponse[];
+      pagination: {
+        page: number;
+        limit: number;
+        total: number;
+        pages: number;
+      };
+    }>("/orders", params);
+
+    // Handle both old format (meta) and new format (pagination)
+    const data = response.data?.data || (Array.isArray(response.data) ? response.data : []);
+    const pagination = response.data?.pagination || response.meta;
+    const total = pagination?.total || 0;
+    const page = pagination?.page || 1;
+    const limit = pagination?.limit || 10;
+    const totalPages = (pagination && 'pages' in pagination) ? pagination.pages : Math.ceil(total / limit);
 
     return {
-      orders: response.data || [],
-      total: response.meta?.total || 0,
-      page: response.meta?.page || 1,
-      limit: response.meta?.limit || 10,
-      hasNext: response.meta?.hasNext || false,
-      hasPrev: response.meta?.hasPrev || false,
+      orders: data,
+      total,
+      page,
+      limit,
+      hasNext: page < totalPages,
+      hasPrev: page > 1,
     };
   }
 

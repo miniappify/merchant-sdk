@@ -1,3 +1,5 @@
+import { CategoryResponse } from "./category";
+
 /**
  * Product Attribute
  */
@@ -127,8 +129,8 @@ export interface ProductResponse {
   videoUrl?: string;
   /** Các variant của sản phẩm */
   variants?: ProductVariant[];
-  /** Danh sách ID danh mục */
-  categoryIds?: string[];
+  /** Danh sách ID danh mục hoặc danh mục đã populate */
+  categoryIds?: string[] | CategoryResponse[];
   /** Trạng thái hoạt động */
   isActive?: boolean;
   /** Trạng thái có sẵn */

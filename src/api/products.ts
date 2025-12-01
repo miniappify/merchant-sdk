@@ -17,18 +17,31 @@ export class ProductsAPI {
    * Lấy danh sách sản phẩm
    */
   async list(params?: SearchParams): Promise<ProductListResponse> {
-    const response = await this.httpClient.get<ProductResponse[]>(
-      "/products",
-      params
-    );
+    const response = await this.httpClient.get<{
+      data: ProductResponse[];
+      pagination: {
+        page: number;
+        limit: number;
+        total: number;
+        pages: number;
+      };
+    }>("/products", params);
+
+    // Handle both old format (meta) and new format (pagination)
+    const data = response.data?.data || (Array.isArray(response.data) ? response.data : []);
+    const pagination = response.data?.pagination || response.meta;
+    const total = pagination?.total || 0;
+    const page = pagination?.page || 1;
+    const limit = pagination?.limit || 10;
+    const totalPages = (pagination && 'pages' in pagination) ? pagination.pages : Math.ceil(total / limit);
 
     return {
-      products: response.data || [],
-      total: response.meta?.total || 0,
-      page: response.meta?.page || 1,
-      limit: response.meta?.limit || 10,
-      hasNext: response.meta?.hasNext || false,
-      hasPrev: response.meta?.hasPrev || false,
+      products: data,
+      total,
+      page,
+      limit,
+      hasNext: page < totalPages,
+      hasPrev: page > 1,
     };
   }
 

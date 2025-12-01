@@ -11,18 +11,31 @@ export class UsersAPI {
    * Lấy danh sách người dùng
    */
   async list(params?: UserSearchParams): Promise<UserListResponse> {
-    const response = await this.httpClient.get<UserResponse[]>(
-      "/users",
-      params
-    );
+    const response = await this.httpClient.get<{
+      data: UserResponse[];
+      pagination: {
+        page: number;
+        limit: number;
+        total: number;
+        pages: number;
+      };
+    }>("/users", params);
+
+    // Handle both old format (meta) and new format (pagination)
+    const data = response.data?.data || (Array.isArray(response.data) ? response.data : []);
+    const pagination = response.data?.pagination || response.meta;
+    const total = pagination?.total || 0;
+    const page = pagination?.page || 1;
+    const limit = pagination?.limit || 10;
+    const totalPages = (pagination && 'pages' in pagination) ? pagination.pages : Math.ceil(total / limit);
 
     return {
-      users: response.data || [],
-      total: response.meta?.total || 0,
-      page: response.meta?.page || 1,
-      limit: response.meta?.limit || 10,
-      hasNext: response.meta?.hasNext || false,
-      hasPrev: response.meta?.hasPrev || false,
+      users: data,
+      total,
+      page,
+      limit,
+      hasNext: page < totalPages,
+      hasPrev: page > 1,
     };
   }
 
