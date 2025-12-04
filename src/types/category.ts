@@ -10,6 +10,12 @@ export interface CreateCategoryDto {
   color: string;
   /** Icon danh mục (Lucide icon name) */
   icon?: string;
+  /** URL hình ảnh danh mục */
+  image?: string;
+  /** Slug danh mục (URL-friendly identifier) */
+  slug?: string;
+  /** ID danh mục cha cho danh mục phân cấp */
+  parentCategoryId?: string;
   /** Trạng thái hoạt động */
   isActive?: boolean;
 }
@@ -26,6 +32,12 @@ export interface UpdateCategoryDto {
   color?: string;
   /** Icon danh mục (Lucide icon name) */
   icon?: string;
+  /** URL hình ảnh danh mục */
+  image?: string;
+  /** Slug danh mục (URL-friendly identifier) */
+  slug?: string;
+  /** ID danh mục cha cho danh mục phân cấp */
+  parentCategoryId?: string;
   /** Trạng thái hoạt động */
   isActive?: boolean;
 }
@@ -44,6 +56,12 @@ export interface CategoryResponse {
   color: string;
   /** Icon danh mục */
   icon?: string;
+  /** URL hình ảnh danh mục */
+  image?: string;
+  /** Slug danh mục (URL-friendly identifier) */
+  slug?: string;
+  /** ID danh mục cha cho danh mục phân cấp */
+  parentCategoryId?: string;
   /** Trạng thái hoạt động */
   isActive: boolean;
   /** Ngày tạo */

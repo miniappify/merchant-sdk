@@ -99,12 +99,22 @@ const newCategory = await sdk.categories.create({
   name: 'Danh mục mới',
   description: 'Mô tả danh mục',
   color: '#FF5733',
-  icon: 'shopping-bag'
+  icon: 'shopping-bag',
+  image: 'https://example.com/category-image.jpg',
+  slug: 'danh-muc-moi'
+});
+
+// Tạo danh mục con (subcategory)
+const subCategory = await sdk.categories.create({
+  name: 'Danh mục con',
+  color: '#FF5733',
+  parentCategoryId: newCategory.id // ID của danh mục cha
 });
 
 // Cập nhật danh mục
 const updatedCategory = await sdk.categories.update('category-id', {
-  name: 'Tên danh mục mới'
+  name: 'Tên danh mục mới',
+  parentCategoryId: 'parent-category-id' // Có thể thay đổi danh mục cha
 });
 ```
 

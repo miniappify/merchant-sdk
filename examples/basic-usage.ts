@@ -55,8 +55,18 @@ async function example() {
       description: "Mô tả danh mục demo",
       color: "#FF5733",
       icon: "shopping-bag",
+      image: "https://example.com/category-image.jpg",
+      slug: "danh-muc-demo",
     });
     console.log("Danh mục mới:", newCategory);
+
+    // 6.1. Tạo danh mục con (subcategory)
+    const subCategory = await sdk.categories.create({
+      name: "Danh mục con demo",
+      color: "#FF5733",
+      parentCategoryId: newCategory.id,
+    });
+    console.log("Danh mục con:", subCategory);
 
     // 7. Lấy danh sách đơn hàng
     const orders = await sdk.orders.list({ page: 1, limit: 10 });
